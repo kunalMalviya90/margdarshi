@@ -6,7 +6,7 @@
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://margdarshi-backend.onrender.com/api/$1"
+            "destination": "https://margdarshi-kus5.onrender.com/api/$1"
         }
     ]
 }
