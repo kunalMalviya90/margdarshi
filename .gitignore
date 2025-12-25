@@ -1,0 +1,25 @@
+# Margdarshi
+
+node_modules
+npm-debug.log
+.DS_Store
+*.log
+
+# Environment
+.env
+.env.local
+.env.backup
+
+# Build
+dist
+build
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
