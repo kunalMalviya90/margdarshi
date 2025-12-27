@@ -291,8 +291,38 @@ async function callGitaAPI(question) {
     } catch (error) {
         console.error('Gita API Error:', error.message);
 
-        // Fallback response with real Gita wisdom
-        return `🕉️ **Margdarshi's Wisdom**\n\nDear seeker, the Bhagavad Gita teaches us eternal truths:\n\n**कर्मण्येवाधिकारस्ते मा फलेषु कदाचन**\n*"You have the right to perform your duty, but not to the fruits of your actions."* (Bhagavad Gita 2.47)\n\nThe Gita guides us to:\n\n1. **Perform our duty (dharma)** without attachment to results\n2. **Maintain equanimity** in success and failure, pleasure and pain  \n3. **Understand our eternal nature** - we are immortal souls, not just bodies\n4. **Practice selfless action (Nishkama Karma)** for the greater good\n5. **Seek inner peace** through meditation and self-realization\n6. **Surrender to the Divine** with devotion and faith\n\n🙏 May you find peace and clarity on your path.`;
+        // Generate question-specific fallback response
+        const lowerQuestion = question.toLowerCase();
+        let specificWisdom = '';
+        let relevantVerse = '';
+
+        if (lowerQuestion.includes('krishna') || lowerQuestion.includes('god') || lowerQuestion.includes('bhagwan')) {
+            relevantVerse = `**श्रीभगवानुवाच - मत्त: परतरं नान्यत्किञ्चिदस्ति धनञ्जय**\n*"Lord Krishna said: There is nothing higher than Me, O Arjuna."* (Bhagavad Gita 7.7)`;
+            specificWisdom = `Lord Krishna is the **Supreme Divine Being**, the source of all creation and the ultimate reality. He appears as the charioteer and guide of Arjuna in the Bhagavad Gita. Krishna represents:\n\n• **The Supreme Consciousness** - He is the ultimate truth beyond all manifestation\n• **Divine Love and Compassion** - He guides us with infinite love\n• **The Inner Guide** - He resides in the hearts of all beings\n• **The Path to Liberation** - Through devotion (bhakti) to Krishna, we attain moksha\n\nKrishna teaches us to surrender our ego, perform our duties selflessly, and realize our divine nature.`;
+        } else if (lowerQuestion.includes('dharma') || lowerQuestion.includes('duty')) {
+            relevantVerse = `**श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्**\n*"It is better to perform one's own dharma imperfectly than to perform another's dharma perfectly."* (Bhagavad Gita 3.35)`;
+            specificWisdom = `**Dharma** is one of the most important concepts in the Bhagavad Gita. It means:\n\n• **Righteous Duty** - Your moral and ethical responsibilities\n• **Life Purpose** - The path aligned with your true nature\n• **Universal Order** - Living in harmony with cosmic law\n• **Selfless Service** - Performing actions without selfish motives\n\nKrishna teaches that we must follow our own dharma, even if imperfect, rather than imitate others. Our dharma includes our duties to family, society, and our spiritual growth.`;
+        } else if (lowerQuestion.includes('karma') || lowerQuestion.includes('action')) {
+            relevantVerse = `**कर्मण्येवाधिकारस्ते मा फलेषु कदाचन**\n*"You have the right to perform your duty, but not to the fruits of your actions."* (Bhagavad Gita 2.47)`;
+            specificWisdom = `**Karma** in the Bhagavad Gita refers to action and its consequences:\n\n• **Nishkama Karma** - Perform actions without attachment to results\n• **Every action has consequences** - What you sow, you reap\n• **Work as worship** - Dedicate all actions to the Divine\n• **Freedom from bondage** - Detached action leads to liberation\n\nThe key teaching is to focus on doing your duty perfectly, but remain detached from success or failure. This is the path to inner peace and spiritual freedom.`;
+        } else if (lowerQuestion.includes('fear') || lowerQuestion.includes('anxiety') || lowerQuestion.includes('worry')) {
+            relevantVerse = `**नासतो विद्यते भावो नाभावो विद्यते सतः**\n*"The unreal has no existence; the real never ceases to be."* (Bhagavad Gita 2.16)`;
+            specificWisdom = `The Bhagavad Gita teaches us to **overcome fear** through wisdom:\n\n• **You are the eternal soul (Atma)** - Not the temporary body\n• **Fear comes from attachment** - To outcomes, possessions, and ego\n• **Focus on duty, not results** - Worry about what you can control\n• **Practice equanimity** - Remain balanced in pleasure and pain\n• **Surrender to the Divine** - Trust in Krishna's guidance\n\nKrishna reminds Arjuna that the soul cannot be killed, burned, or destroyed. Understanding this eternal truth dissolves all fear.`;
+        } else if (lowerQuestion.includes('peace') || lowerQuestion.includes('shanti') || lowerQuestion.includes('meditation')) {
+            relevantVerse = `**योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय**\n*"Perform your duty equipoised, O Arjuna, abandoning all attachment to success or failure."* (Bhagavad Gita 2.48)`;
+            specificWisdom = `The path to **inner peace** according to Bhagavad Gita:\n\n• **Control your mind** - Through meditation and yoga practice\n• **Practice detachment** - Let go of desires and expectations\n• **Maintain equanimity** - Stay balanced in all situations\n• **Selfless service** - Work without ego or selfish motives\n• **Devotion to God** - Surrender to Krishna with love and faith\n\nTrue peace comes not from external circumstances, but from inner balance and spiritual realization.`;
+        } else if (lowerQuestion.includes('life') || lowerQuestion.includes('purpose') || lowerQuestion.includes('meaning')) {
+            relevantVerse = `**यदा यदा हि धर्मस्य ग्लानिर्भवति भारत**\n*"Whenever there is a decline in righteousness, O Arjuna, I manifest Myself."* (Bhagavad Gita 4.7)`;
+            specificWisdom = `The **meaning of life** according to Bhagavad Gita:\n\n• **Self-realization** - Discover your true divine nature\n• **Fulfill your dharma** - Perform your duties with dedication\n• **Spiritual evolution** - Grow beyond material attachments\n• **Service to humanity** - Help others selflessly\n• **Union with Divine** - Attain moksha (liberation) through devotion\n\nLife is a journey of the eternal soul through temporary bodies. Our purpose is to realize we are not separate from God, but part of the divine consciousness.`;
+        } else if (lowerQuestion.includes('death') || lowerQuestion.includes('soul') || lowerQuestion.includes('atma')) {
+            relevantVerse = `**न जायते म्रियते वा कदाचिन्नायं भूत्वा भविता वा न भूयः**\n*"The soul is never born and never dies; it is eternal, indestructible, and timeless."* (Bhagavad Gita 2.20)`;
+            specificWisdom = `The Bhagavad Gita's teaching on the **eternal soul (Atma)**:\n\n• **The soul is immortal** - It cannot be destroyed by any means\n• **The body is temporary** - Like changing clothes, the soul changes bodies\n• **Death is an illusion** - Only the body dies, not the true self\n• **You are divine consciousness** - Not the material form\n• **Fear of death is ignorance** - Wisdom removes this fear\n\nUnderstanding the eternal nature of the soul is the foundation of all spiritual wisdom in the Gita.`;
+        } else {
+            relevantVerse = `**कर्मण्येवाधिकारस्ते मा फलेषु कदाचन**\n*"You have the right to perform your duty, but not to the fruits of your actions."* (Bhagavad Gita 2.47)`;
+            specificWisdom = `The Bhagavad Gita's **core teachings**:\n\n• **Perform your duty (dharma)** without attachment to results\n• **Maintain equanimity** in success and failure, pleasure and pain\n• **Understand your eternal nature** - You are an immortal soul, not just a body\n• **Practice selfless action (Nishkama Karma)** for the greater good\n• **Seek inner peace** through meditation and self-realization\n• **Surrender to the Divine** with devotion and faith`;
+        }
+
+        return `🕉️ **Margdarshi's Wisdom from Bhagavad Gita**\n\n**Your Question:** "${question}"\n\n${relevantVerse}\n\n---\n\n**✨ Guidance:**\n\n${specificWisdom}\n\n---\n\n🙏 **Om Shanti.** May the eternal wisdom of Shrimad Bhagavad Gita guide you on your path to truth and enlightenment.`;
     }
 }
 
@@ -300,32 +330,59 @@ async function callGitaAPI(question) {
  * Get AI response based on configured provider
  */
 export async function getAIResponse(question) {
+    console.log('🤖 AI Provider:', aiConfig.provider);
+    console.log('❓ User Question:', question);
+
     try {
+        let response;
+
         if (aiConfig.provider === 'groq') {
             // Groq - Free, fast, multilingual AI
             if (!aiConfig.groq.apiKey) {
-                throw new Error('Groq API key not configured. Get free key at https://console.groq.com/keys');
+                console.warn('⚠️ Groq API key not configured, falling back to Gita API');
+                return await callGitaAPI(question);
             }
-            return await callGroq(question);
+            console.log('📡 Calling Groq API...');
+            response = await callGroq(question);
         } else if (aiConfig.provider === 'gita') {
             // Free Bhagavad Gita API - No API key needed!
-            return await callGitaAPI(question);
+            console.log('📡 Calling Gita API...');
+            response = await callGitaAPI(question);
         } else if (aiConfig.provider === 'gemini') {
             if (!aiConfig.gemini.apiKey) {
-                throw new Error('Gemini API key not configured');
+                console.warn('⚠️ Gemini API key not configured, falling back to Gita API');
+                return await callGitaAPI(question);
             }
-            return await callGemini(question);
+            console.log('📡 Calling Gemini API...');
+            response = await callGemini(question);
         } else if (aiConfig.provider === 'openai') {
             if (!aiConfig.openai.apiKey) {
-                throw new Error('OpenAI API key not configured');
+                console.warn('⚠️ OpenAI API key not configured, falling back to Gita API');
+                return await callGitaAPI(question);
             }
-            return await callOpenAI(question);
+            console.log('📡 Calling OpenAI API...');
+            response = await callOpenAI(question);
         } else {
-            throw new Error('Invalid AI provider configured');
+            console.warn('⚠️ Invalid AI provider configured, using Gita API');
+            response = await callGitaAPI(question);
         }
+
+        console.log('✅ Successfully got AI response');
+        return response;
+
     } catch (error) {
-        console.error('AI API Error:', error.response?.data || error.message);
-        throw error;
+        console.error('❌ AI API Error:', error.response?.data || error.message);
+        console.log('🔄 Attempting fallback to Gita API...');
+
+        // Try fallback to Gita API
+        try {
+            const fallbackResponse = await callGitaAPI(question);
+            console.log('✅ Fallback to Gita API successful');
+            return fallbackResponse;
+        } catch (fallbackError) {
+            console.error('❌ Fallback also failed:', fallbackError.message);
+            throw error; // Throw original error
+        }
     }
 }
 

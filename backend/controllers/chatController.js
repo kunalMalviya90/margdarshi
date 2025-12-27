@@ -7,9 +7,11 @@ import { getAIResponse } from '../config/aiConfig.js';
 export const getGitaResponse = async (req, res) => {
     try {
         const { question } = req.body;
+        console.log('\n📝 New chat request from user:', req.user?.name || 'Unknown');
 
         // Validation
         if (!question || typeof question !== 'string' || !question.trim()) {
+            console.log('⚠️ Invalid question received');
             return res.status(400).json({
                 success: false,
                 message: 'Please provide a valid question'
@@ -19,15 +21,19 @@ export const getGitaResponse = async (req, res) => {
         // Trim and limit question length
         const trimmedQuestion = question.trim();
         if (trimmedQuestion.length > 1000) {
+            console.log('⚠️ Question too long');
             return res.status(400).json({
                 success: false,
                 message: 'Question is too long. Please keep it under 1000 characters.'
             });
         }
 
+        console.log('🔍 Processing question:', trimmedQuestion);
+
         // Get AI response
         const answer = await getAIResponse(trimmedQuestion);
 
+        console.log('✅ Sending response to user');
         res.json({
             success: true,
             question: trimmedQuestion,
@@ -36,7 +42,7 @@ export const getGitaResponse = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Chat error:', error);
+        console.error('❌ Chat error:', error);
 
         // Handle specific AI API errors
         if (error.response?.status === 429) {

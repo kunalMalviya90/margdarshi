@@ -32,6 +32,8 @@ const ChatPage = () => {
         const userMessage = input.trim();
         setInput('');
 
+        console.log('📤 Sending question:', userMessage);
+
         // Add user message
         setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
 
@@ -43,6 +45,7 @@ const ChatPage = () => {
                 question: userMessage
             });
 
+            console.log('✅ Received response:', response.data);
             setTyping(false);
 
             // Add AI response
@@ -51,6 +54,7 @@ const ChatPage = () => {
                 content: response.data.answer
             }]);
         } catch (error) {
+            console.error('❌ Chat API Error:', error.response?.data || error.message);
             setTyping(false);
             setMessages(prev => [...prev, {
                 role: 'ai',
@@ -93,8 +97,8 @@ const ChatPage = () => {
                                 <div className={`flex items-start space-x-3 max-w-3xl ${message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
                                     {/* Avatar */}
                                     <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${message.role === 'user'
-                                            ? 'bg-gradient-to-r from-saffron-500 to-saffron-600'
-                                            : 'bg-gradient-to-r from-spiritual-blue to-saffron-400'
+                                        ? 'bg-gradient-to-r from-saffron-500 to-saffron-600'
+                                        : 'bg-gradient-to-r from-spiritual-blue to-saffron-400'
                                         }`}>
                                         <span className="text-xl">
                                             {message.role === 'user' ? '👤' : '🪷'}
@@ -164,8 +168,8 @@ const ChatPage = () => {
                             whileTap={{ scale: loading ? 1 : 0.95 }}
                             disabled={loading || !input.trim()}
                             className={`px-8 py-4 bg-gradient-to-r from-saffron-500 to-saffron-600 text-white font-bold rounded-full shadow-lg transition-all ${loading || !input.trim()
-                                    ? 'opacity-50 cursor-not-allowed'
-                                    : 'hover:shadow-saffron-500/50'
+                                ? 'opacity-50 cursor-not-allowed'
+                                : 'hover:shadow-saffron-500/50'
                                 }`}
                         >
                             {loading ? (
